@@ -1,19 +1,18 @@
-# javascript-test-0004-final-14736-shivansh
-Final Project Assignment - This repository contains the complete final project code and documentation.
+# Concentric Number Square Pattern in JavaScript
 
+This project demonstrates how to generate a **Concentric Number Square Pattern** using JavaScript.
 
-# Concentric Number Pattern (JavaScript)
+The program prints a square matrix where numbers decrease toward the center, forming **layers (or rings)**. This problem is commonly used in **coding assessments and technical interviews** to test logical thinking and nested loop concepts.
 
-## Overview
+---
 
-This JavaScript program prints a **7 × 7 concentric number pattern**.
-The numbers form square layers (or rings) that decrease as we move from the outer border toward the center.
+## 📌 Problem Statement
 
-The outermost layer contains the number **4**, and the values decrease step by step until the center value **1** is reached.
+Write a program that prints a **Concentric Number Square Pattern** for a given square size.
 
-Example output:
+Example when `size = 7`:
 
-```id="3m3i6x"
+```text
 4 4 4 4 4 4 4
 4 3 3 3 3 3 4
 4 3 2 2 2 3 4
@@ -25,144 +24,128 @@ Example output:
 
 ---
 
-## How the Program Works
+## 🧠 Logic Used
 
-### 1. Pattern Size
+1. The pattern forms a **square matrix of size `n × n`**.
+2. Each cell belongs to a **layer based on its distance from the nearest border**.
+3. The distance from the border is calculated using:
 
-The variable `size` determines the dimensions of the square grid.
-
-```javascript id="v5flk2"
-let size = 7;
+```text
+distance = min(row, column, size - 1 - row, size - 1 - column)
 ```
 
-This creates a **7 × 7 pattern**.
+4. The maximum number in the pattern is:
+
+```text
+maxNumber = ceil(size / 2)
+```
+
+5. The value printed at each position is calculated as:
+
+```text
+value = maxNumber - distance
+```
+
+This logic ensures the pattern works for **any valid square size**.
 
 ---
 
-### 2. Outer Loop (Rows)
+## 💻 Implementation
 
-```javascript id="j9ig8p"
-for (let i = 0; i < size; i++)
-```
+```javascript
+/**
+ * Prints a concentric number square pattern
+ * @param {number} size - Size of the square
+ */
 
-This loop iterates through each **row** of the pattern.
-
----
-
-### 3. Inner Loop (Columns)
-
-```javascript id="g7m3x8"
-for (let j = 0; j < size; j++)
-```
-
-This loop controls the **columns** within each row.
-
----
-
-### 4. Distance from the Nearest Edge
-
-```javascript id="s0t9x7"
-let dist = Math.min(i, j, size - 1 - i, size - 1 - j);
-```
-
-This calculates the **minimum distance from the current position to any border**.
-
-Example distances:
-
-| Layer        | Distance |
-| ------------ | -------- |
-| Outer border | 0        |
-| Second layer | 1        |
-| Third layer  | 2        |
-| Center       | 3        |
-
----
-
-### 5. Number Calculation
-
-```javascript id="p2k4l0"
-let num = 4 - dist;
-```
-
-The value decreases as the distance increases.
-
-| Distance | Printed Number |
-| -------- | -------------- |
-| 0        | 4              |
-| 1        | 3              |
-| 2        | 2              |
-| 3        | 1              |
-
----
-
-### 6. Build and Print Each Row
-
-```javascript id="t7a5h1"
-row += num + " ";
-```
-
-Each number is appended to the row string.
-
-Finally, the row is printed:
-
-```javascript id="k6f3r2"
-console.log(row.trim());
-```
-
-`trim()` removes the extra space at the end.
-
----
-
-## Code
-
-```javascript id="q2b4m7"
-// 7x7 Concentric Number Pattern
-
-let size = 7;
-
-for (let i = 0; i < size; i++) {
-
-  let row = "";
-
-  for (let j = 0; j < size; j++) {
-
-    // find distance from the nearest border
-    let dist = Math.min(i, j, size - 1 - i, size - 1 - j);
-
-    // calculate number to print
-    let num = 4 - dist;
-
-    row += num + " ";
+function printConcentricNumberSquare(size) {
+  if (!Number.isInteger(size) || size < 1) {
+    console.error("Invalid input: size must be a positive integer.");
+    return;
   }
 
-  console.log(row.trim());
+  const maxNumber = Math.ceil(size / 2);
+
+  for (let row = 0; row < size; row++) {
+    let line = "";
+
+    for (let col = 0; col < size; col++) {
+
+      const distance = Math.min(
+        row,
+        col,
+        size - 1 - row,
+        size - 1 - col
+      );
+
+      const value = maxNumber - distance;
+
+      line += value + " ";
+    }
+
+    console.log(line.trim());
+  }
 }
+
+// Example
+printConcentricNumberSquare(7);
 ```
 
 ---
 
-## How to Run the Program
+## ⚙️ How to Run
 
-1. Install **Node.js**
-2. Save the file as `concentricPattern.js`
-3. Open the terminal in the project folder
-4. Run the command:
+1. Install **Node.js** on your system.
+2. Save the file as:
 
-```id="4h1z7n"
-node concentricPattern.js
+```text
+concentricSquare.js
+```
+
+3. Run the program using:
+
+```bash
+node concentricSquare.js
 ```
 
 ---
 
-## Concepts Used
+## 📂 Project Structure
 
-* Nested loops
-* Pattern printing logic
-* Mathematical distance calculation
-* JavaScript console output
+```text
+concentric-number-square-pattern
+│
+├── concentricSquare.js
+└── README.md
+```
 
 ---
 
-## Author
+## 🚀 Features
 
-Created as a practice program for understanding **pattern printing and loop logic in JavaScript**.
+* Clean and readable JavaScript implementation
+* Works for any square size
+* Efficient mathematical logic
+* Reusable function design
+* Beginner-friendly explanation
+
+---
+
+## 📚 Concepts Covered
+
+* JavaScript Nested Loops
+* Pattern Printing Algorithms
+* Matrix Logic
+* Mathematical Optimization
+
+---
+
+## 👨‍💻 Author
+
+**Shivansh Dubey**
+
+B.Tech in Computer Science and Engineering
+Java Full Stack Developer
+
+Technologies:
+Java • JavaScript • React • MySQL
